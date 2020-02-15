@@ -1,0 +1,30 @@
+name: blog-deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v1
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.62.2"
+
+      - name: Build
+        run: hugo -t noteworthy
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          external_repository: zeyaddeeb/zeyaddeeb.github.io
+          publish_branch: master
+          publish_dir: ./public
