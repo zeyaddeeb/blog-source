@@ -99,14 +99,14 @@ for response in responses:
 
 If you are a true python hero, you might see this code example and instantly think, "Why not use `aiokafka` package to provide `async` features, which should optimize the performance..." Then you'd have a Machine Learning pipeline that many companies dream of implementing.
 
-I've been a Python cheerleader since version 2.4. It's not that I don't like Java or C++; I simply appreciate how Python got the scientific community excited about solving complicated problems in new ways. The idea that you don't have to be an engineer who understands [SOLID principles](https://en.wikipedia.org/wiki/SOLID) so you can write a basic program that consumes and analyzes image data from the [Hubble Telescope](https://hla.stsci.edu/) is worth celebrating.
+I've been a Python cheerleader since version 2.4. It's not that I don't like Java or C++; I simply appreciate how Python got the scientific community excited about solving complicated problems in new ways. You don't have to be an engineer who understands [SOLID principles](https://en.wikipedia.org/wiki/SOLID) to write a basic program that consumes and analyzes image data from the [Hubble Telescope](https://hla.stsci.edu/). To me, that's pretty cool.
 
 Turning back to the original point of the Kafka video enrichment example above- I wanted to increase the `chuck_size` from `5mb` to `10mb` , without taking a hit on performance. To do that, I began to explore Go as an alternative to the Python code above.
 
 Rewriting the pipeline from Python to Go was not that difficult; what you see is what you get. You can find the full example on [GitHub](https://github.com/zeyaddeeb/ml-video-pipeline). Unfortunately, the performance was just a tad better better than Python when it comes to `io`. The main bottleneck was networking (making the API call to Google for enrichment) which, frankly, is a language-agnostic problem.
 
-While running these processes in a distributed fashion on Kuberenetes (also built in Go) could also be problematic since it's easy to hit the rate limits for the Video Intelligence API when you have a bunch of pods calling the API all at once. The other option is to use [aistreamer](https://github.com/google/aistreamer), which requires a different blog post all together, since it mainly uses Java or C++ clients.
+Running these processes in a distributed fashion on Kuberenetes (also built in Go) could be problematic since it's easy to hit the rate limits for the Video Intelligence API when you have a bunch of pods calling the API all at once. The other option is to use [aistreamer](https://github.com/google/aistreamer), which requires a different blog post all together, since it mainly uses Java or C++ clients.
 
-While deciding to use a new language didn't get me vastly different results, it was still worth the effort. I know that Python is still most relevant when it comes to Machine Learning and Data Science, but Go became my second choice when developing production Machine Learning applications not only because of its speed, but also because of its versatility.
+While deciding to use a new language didn't get me vastly different results, it was still worth the effort. I know that Python is largely most relevant when it comes to Machine Learning and Data Science, but Go became my second choice when developing production Machine Learning applications not only because of its speed, but also because of its versatility.
 
-I migrated the framework I'm using for the blog to Hugo (requires Go to develop) so I can start doing more Go in my spare time.
+I migrated the framework I'm using for the blog to Hugo (requires Go to develop) so I can start doing more Go in my spare time. I'll share more as I learn.

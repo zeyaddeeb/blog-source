@@ -3,17 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://www.zeyaddeeb.com/posts/migrarion/</loc>
-    <lastmod>2020-02-09T00:00:00+00:00</lastmod>
+    <loc>https://www.zeyaddeeb.com/posts/coronavirus/</loc>
+    <lastmod>2020-02-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.zeyaddeeb.com/posts/</loc>
-    <lastmod>2020-02-09T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://www.zeyaddeeb.com/</loc>
+    <lastmod>2020-02-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.zeyaddeeb.com/posts/golang-in-ml/</loc>
     <lastmod>2020-02-09T00:00:00+00:00</lastmod>
   </url>
   
