@@ -1,11 +1,26 @@
 ---
 date: 2020-02-09
-title: "Migrating to Hugo from Jykell"
+title: "Go, in a Machine Learning Application..."
 ---
 
-Nearly six months ago, I found myself working on a project to consume video data in [Apache Kafka](https://kafka.apache.org/). The original service was written in [Python](https://www.python.org/).
+A few years back, like almost all engineers, I installed [Golang](https://golang.org/) (Go), added `GOPATH` to my `.zshrc` and ran a couple `go run .` and `go build .` on simple programs like this:
 
-Here is an example Kafka producer that sent video data to a topic:
+{{< highlight go >}}
+
+package main
+import "fmt"
+func main() {
+
+    fmt.Println("hello world")
+
+}
+{{< /highlight >}}
+
+At that point I was convinced that Go is __neat__, and figured I should explore more sometime. Every now and then, I looked at `terraform` or `docker` internals, which are all written in Go, so I could better understand how specific components worked. But I didn't really start my Go journey until this video processing project.
+
+I found myself working on a project to consume video data in [Apache Kafka](https://kafka.apache.org/). I chose to develop the application in [Python](https://www.python.org/), which is my strong suit.
+
+Here is a Python example of the Kafka producer that sent video data to a topic:
 
 {{< highlight python >}}
 from kafka import KafkaProducer
@@ -34,7 +49,7 @@ with io.open(video_path, 'rb') as video_file:
 
 {{< /highlight >}}
 
-In this setup, there was a parallel consumer process that sent the produced data to [Google Video Intelligence API](https://cloud.google.com/video-intelligence) for enrichment and put the results on a new topic, which would later be joined with the raw data:
+In this setup, there was also a parallel consumer process that sent the produced data to [Google Video Intelligence API](https://cloud.google.com/video-intelligence) for enrichment and put the results on a new topic, which would later be joined with the raw data:
 
 {{< highlight python >}}
 from kafka import KafkaConsumer, KafkaProducer
@@ -82,31 +97,16 @@ for response in responses:
 
 {{< /highlight >}}
 
-If you are a true python hero, you might see this code example and instantly think, "Why not use `aiokafka` package to provide `async` features, which should optimize the performance?" Then you'd have a Machine Learning pipeline that many companies dream of implementing.
+If you are a true python hero, you might see this code example and instantly think, "Why not use `aiokafka` package to provide `async` features, which should optimize the performance..." Then you'd have a Machine Learning pipeline that many companies dream of implementing.
 
 I've been a Python cheerleader since version 2.4. It's not that I don't like Java or C++; I simply appreciate how Python got the scientific community excited about solving complicated problems in new ways. The idea that you don't have to be an engineer who understands [SOLID principles](https://en.wikipedia.org/wiki/SOLID) so you can write a basic program that consumes and analyzes image data from the [Hubble Telescope](https://hla.stsci.edu/) is worth celebrating.
 
-Turning back to the original point of the Kafka video enrichment example above- I wanted to increase the `chuck_size` from `5mb` to `10mb` , without taking a hit on performance. To do that, I began to explore [Golang](https://golang.org/), which spoiler alert, certainly took me down a rabbit hole.
+Turning back to the original point of the Kafka video enrichment example above- I wanted to increase the `chuck_size` from `5mb` to `10mb` , without taking a hit on performance. To do that, I began to explore Go as an alternative to the Python code above.
 
-A few years back, like all engineers, I installed Golang (Go), added `GOPATH` to my `.zshrc` and ran a couple `go run .` and `go build .` on simple programs like this:
+Rewriting the pipeline from Python to Go was not that difficult; what you see is what you get. You can find the full example on [GitHub](https://github.com/zeyaddeeb/ml-video-pipeline). Unfortunately, the performance was just a tad better better than Python when it comes to `io`. The main bottleneck was networking (making the API call to Google for enrichment) which, frankly, is a language-agnostic problem.
 
-{{< highlight go >}}
+While running these processes in a distributed fashion on Kuberenetes (also built in Go) could also be problematic since it's easy to hit the rate limits for the Video Intelligence API when you have a bunch of pods calling the API all at once. The other option is to use [aistreamer](https://github.com/google/aistreamer), which requires a different blog post all together, since it mainly uses Java or C++ clients.
 
-package main
-import "fmt"
-func main() {
+While deciding to use a new language didn't get me vastly different results, it was still worth the effort. I know that Python is still most relevant when it comes to Machine Learning and Data Science, but Go became my second choice when developing production Machine Learning applications not only because of its speed, but also because of its versatility.
 
-    fmt.Println("hello world")
-
-}
-{{< /highlight >}}
-
-At that point I was convinced that Go is __neat__, and figured I should explore more sometime. Every now and then, I looked at `terraform` or `docker` internals, which are all written in Go, so I can understand how specific things worked. But I didn't really start my Go journey until this video processing project.
-
-Rewriting the pipeline in Go was not that difficult. You can find the full example on [GitHub](https://github.com/zeyaddeeb/ml-video-pipeline). The performance was not that much better than Python. The main bottleneck is networking (making the API call to Google for enrichment) which is a solely language agnostic problem.
-
-Running these processes in a distributed fashion Kuberenets (also built in Go) could also be problematic since it's easy to hit the rate limits for the Video Intelligence API. The other option is to use [aistreamer](https://github.com/google/aistreamer), which requires a different blog post all together.
-
-While exploring another language didn't get me different results, it was still worth the effort. I know that Python is still most relevant when it comes to Machine Learning and Data Science, but Go became my second choice when developing production Machine Learning applications.
-
-I wasn't really updating the blog as frequently as I would like. So I decided to start a new page with Hugo (which is written in Go) and update the blog more often as I learn more Go. Most of my code will still be in Python, but there will be some Go nuggets every now and then.
+I migrated the framework I'm using for the blog to Hugo (requires Go to develop) so I can start doing more Go in my spare time.
