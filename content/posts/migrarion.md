@@ -103,8 +103,10 @@ func main() {
 
 At that point I was convinced that Go is __neat__, and figured I should explore more sometime. Every now and then, I looked at `terraform` or `docker` internals, which are all written in Go, so I can understand how specific things worked. But I didn't really start my Go journey until this video processing project.
 
-Rewriting the pipeline in Go was not that difficult. You can find the full example on [GitHub](https://github.com/zeyaddeeb/ml-video-pipeline).
+Rewriting the pipeline in Go was not that difficult. You can find the full example on [GitHub](https://github.com/zeyaddeeb/ml-video-pipeline). The performance was not that much better than Python. The main bottleneck is networking (making the API call to Google for enrichment) which is a solely language agnostic problem.
 
-Some nuggets...
+Running these processes in a distributed fashion Kuberenets (also built in Go) could also be problematic since it's easy to hit the rate limits for the Video Intelligence API. The other option is to use [aistreamer](https://github.com/google/aistreamer), which requires a different blog post all together.
 
-Golang became my second choice to develop applications. I wasn't really updating the blog as frequently as I would like. So I decided to start a new page with Hugo and update the blog more often. Most of my code will be in Python, but there will be some Go nuggets every now and then.
+While exploring another language didn't get me different results, it was still worth the effort. I know that Python is still most relevant when it comes to Machine Learning and Data Science, but Go became my second choice when developing production Machine Learning applications.
+
+I wasn't really updating the blog as frequently as I would like. So I decided to start a new page with Hugo (which is written in Go) and update the blog more often as I learn more Go. Most of my code will still be in Python, but there will be some Go nuggets every now and then.
