@@ -12,12 +12,13 @@
     
     
     <item>
-      <title>Corona virus (COVID-19) outbreak analysis</title>
+      <title>Coronavirus (COVID-19) outbreak analysis</title>
       <link>https://www.zeyaddeeb.com/posts/coronavirus/</link>
       <pubDate>Sat, 15 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://www.zeyaddeeb.com/posts/coronavirus/</guid>
-      <description>Coming Soon!</description>
+      <description>Data source: John Hopkins: The Center for Systems Science and Engineering (CSSE)
+SIR epidemic model \( S(t)+I(t)+R(t)=N \), where \(t\) is time</description>
     </item>
     
     <item>
@@ -27,6 +28,15 @@
       
       <guid>https://www.zeyaddeeb.com/posts/golang-in-ml/</guid>
       <description>A few years back, like almost all engineers, I installed Golang (Go), added GOPATH to my .zshrc and ran a couple go run .</description>
+    </item>
+    
+    <item>
+      <title>Harvey, the movie!</title>
+      <link>https://www.zeyaddeeb.com/posts/harvey/</link>
+      <pubDate>Sat, 01 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.zeyaddeeb.com/posts/harvey/</guid>
+      <description>Two of my favorite podcasts are Radiolab and The Anthropocene Reviewed(AR). Today, I&amp;rsquo;ll be writing about an episode I heard from the latter.</description>
     </item>
     
   </channel>

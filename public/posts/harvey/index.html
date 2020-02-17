@@ -122,33 +122,18 @@ if (!doNotTrack) {
 </nav>
         <div id="content" class="content-container">
         
-<h1 class="post-title">Migrating to Hugo from Jykell</h1>
-    <time>February 9, 2020</time>
+<h1 class="post-title">Harvey, the movie!</h1>
+    <time>February 1, 2020</time>
     <div>
         <p>
-        <p>The other day, I was working on a project to consume video data in Kafka, the original service was written in python. Here is an example:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">from</span> <span style="color:#0e84b5;font-weight:bold">kafka</span> <span style="color:#007020;font-weight:bold">import</span> KafkaProducer
-<span style="color:#007020;font-weight:bold">from</span> <span style="color:#0e84b5;font-weight:bold">kafka.errors</span> <span style="color:#007020;font-weight:bold">import</span> KafkaError
-
-producer <span style="color:#666">=</span> KafkaProducer(bootstrap_servers<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#39;</span><span style="color:#4070a0">localhost:9092</span><span style="color:#4070a0">&#39;</span>)
-
-topic <span style="color:#666">=</span> <span style="color:#4070a0"></span><span style="color:#4070a0">&#39;</span><span style="color:#4070a0">my-topic</span><span style="color:#4070a0">&#39;</span>
-
-video <span style="color:#666">=</span> cv2<span style="color:#666">.</span>VideoCapture(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">cool-video.mp4</span><span style="color:#4070a0">&#34;</span>)
-
-<span style="color:#007020;font-weight:bold">while</span> video<span style="color:#666">.</span>isOpened():
-    success, frame <span style="color:#666">=</span> video<span style="color:#666">.</span>read()
-    <span style="color:#007020;font-weight:bold">if</span> <span style="color:#007020;font-weight:bold">not</span> success:
-        <span style="color:#007020;font-weight:bold">break</span>
-
-    data <span style="color:#666">=</span> cv2<span style="color:#666">.</span>imencode(<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;</span><span style="color:#4070a0">.jpeg</span><span style="color:#4070a0">&#39;</span>, frame)[<span style="color:#40a070">1</span>]<span style="color:#666">.</span>tobytes()
-
-    future <span style="color:#666">=</span> producer<span style="color:#666">.</span>send(topic, data)
-    <span style="color:#007020;font-weight:bold">try</span>:
-        future<span style="color:#666">.</span>get(timeout<span style="color:#666">=</span><span style="color:#40a070">10</span>)
-    <span style="color:#007020;font-weight:bold">except</span> KafkaError <span style="color:#007020;font-weight:bold">as</span> e:
-        <span style="color:#007020;font-weight:bold">print</span>(e)
-        <span style="color:#007020;font-weight:bold">break</span></code></pre></div>
+        <p>Two of my favorite podcasts are <a href="https://www.wnycstudios.org/podcasts/radiolab">Radiolab</a> and <a href="https://www.wnycstudios.org/podcasts/anthropocene-reviewed">The Anthropocene Reviewed</a>(AR). Today, I&rsquo;ll be writing about an episode I heard from the latter.</p>
+<p>I learned about <a href="https://en.wikipedia.org/wiki/John_Green_(author)">John Green</a> (producer of AR) from his book <a href="https://en.wikipedia.org/wiki/Turtles_All_the_Way_Down_(novel)">Turtles All the Way Down</a>. I was curious since I heard of the title before in Stephen Hawking&rsquo;s book, <a href="https://en.wikipedia.org/wiki/A_Brief_History_of_Time">A Brief History of Time</a>. Here is the excerpt I remembered:</p>
+<blockquote>
+<p>A well-known scientist (some say it was Bertrand Russell) once gave a public lecture on astronomy. He described how the earth orbits around the sun and how the sun, in turn, orbits around the centre of a vast collection of stars called our galaxy. At the end of the lecture, a little old lady at the back of the room got up and said: &ldquo;What you have told us is rubbish. The world is really a flat plate supported on the back of a giant tortoise.&rdquo; The scientist gave a superior smile before replying, &ldquo;What is the tortoise standing on?&rdquo; &ldquo;You&rsquo;re very clever, young man, very clever,&rdquo; said the old lady. &ldquo;But it&rsquo;s turtles all the way down!&rdquo; - Stephen Hawking</p>
+</blockquote>
+<p>John Green reviewed the movie Harvey in <a href="https://www.wnycstudios.org/podcasts/anthropocene-reviewed/episodes/anthropocene-reviewed-velociraptors-and-harvey">this episode</a>, he also reviewed velociraptors, which was also good, but let&rsquo;s focus on the latter.</p>
+<p><img src="/images/harvey.jpg#center" alt="Harvey movie Poster"></p>
+<p>I&rsquo;ll summarize to make the point and also to accommodate for non-podcast listening folks. John Green described a hard time he was going through and his boss then, recommended Harvey to watch while taking a couple of weeks off work. Trust me, you should listen to the episode.</p>
 
         </p>
     </div>

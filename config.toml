@@ -1,12 +1,10 @@
 baseURL = "https://www.zeyaddeeb.com/"
 languageCode = "en-us"
 title = "Zeyad Deeb"
-theme = "noteworthy"
 enableRobotsTXT = true
 paginate = 4 
 summaryLength = 20
 googleAnalytics = "UA-76463767-1"
-
 
 [author]
     name = "Zeyad Deeb"
@@ -15,6 +13,7 @@ googleAnalytics = "UA-76463767-1"
   description = "The statistical brick road"
   linkedin = "https://www.linkedin.com/in/zeyaddeeb"
   github = "https://github.com/zeyaddeeb"
+  math = true
 
 
 [markup]
