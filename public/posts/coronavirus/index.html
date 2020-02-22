@@ -16,7 +16,7 @@
     
     
     
-    <link rel="stylesheet" href="https://www.zeyaddeeb.com/css/main.min.03322cbe6bddfc28e7b17b84bc5446282a510b14b57be3371ba1f68ef1ab9ce8.css"/>
+    <link rel="stylesheet" href="https://www.zeyaddeeb.com/css/main.min.07a9cfa1a3a8999e9a21606064f4a147e568dd57c3010c09f068f6a9c274e9ca.css"/>
 
     
     
@@ -123,16 +123,115 @@ if (!doNotTrack) {
         <div id="content" class="content-container">
         
 <h1 class="post-title">Coronavirus (COVID-19) outbreak analysis</h1>
-    <time>February 15, 2020</time>
+    <time>February 22, 2020</time>
     <div>
         <p>
-        <h4 id="data-source">Data source:</h4>
+        <p>The <a href="https://www.bloomberg.com/news/articles/2020-02-22/coronavirus-may-be-the-disease-x-health-agency-warned-about">first news article I read this morning</a> described Coronavirus (COVID-19) as &quot;disease X&quot;;</p>
 
-<p>John Hopkins: The Center for Systems Science and Engineering (CSSE)</p>
+<blockquote>
+<p>The World Health Organization cautioned years ago that a mysterious “disease X” could spark an international contagion. The new coronavirus, with its ability to quickly morph from mild to deadly, is emerging as a contender - Bloomberg</p>
+</blockquote>
 
-<h3 id="sir-epidemic-model">SIR epidemic model</h3>
+<p>While these claims are seriously scary, I doubt they're 100% accurate. So often journalists inflate stories to sell news, and I felt like I could create an objective analysis to fact check the news. I've been working on some models surrounding COVID-19 outbreak, which I'll be sharing today.</p>
 
-<p><span  class="math">\( S(t)+I(t)+R(t)=N \)</span>, where <span  class="math">\(t\)</span> is time</p>
+<p>John Hopkins: The Center for Systems Science and Engineering (CSSE), is kind enough to share data they collect from multiple sources. You can grab the data from this <a href="https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6">link</a> or see my <a href="https://github.com/zeyaddeeb/coronavirus">Github</a>.</p>
+
+<p>Obviously, the first thing to analyze is the trend of cases overtime;</p>
+
+<div id="/plots/coronavirus-trend.html" style="display: flex;justify-content: center">
+    <iframe src="/plots/coronavirus-trend.html" width="500vw" height="300" frameBorder="0"></iframe>
+</div>
+
+<p>This chart shows that confirmed cases are on the rise with a whopping total of 1,058,633 cases, with a recovery rate of 13.43% and a death rate of 2.46% as of Feb 26 2020.</p>
+
+<p>There are two reasons why you might not get concerned about these stats.</p>
+
+<ol>
+<li>The recovery rate is higher than the death rate.</li>
+<li>The majority of confirmed cases are confined to China, which is notoriously good at controlling its population, thus making quarantine easier.</li>
+</ol>
+
+<div id="/plots/coronavirus-map.html" style="display: flex;justify-content: center">
+    <iframe src="/plots/coronavirus-map.html" width="500vw" height="300" frameBorder="0"></iframe>
+</div>
+
+<p>If you are an epidemiologist, you know that modeling of infectious diseases requires the use of Ordinary Differential Equations (ODEs) to estimate the long term impacts of the disease on a population.</p>
+
+<p>I'll be covering the <a href="https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology#The_SIR_model">simple compartmental model (SIR)</a></p>
+
+<p>The standard SIR equation is;</p>
+
+<p><span  class="math">\[
+S(t)+I(t)+R(t)=N
+\]</span></p>
+
+<p>which has three compartments that can be described as follows:</p>
+
+<ul>
+<li><span  class="math">\( S \)</span>: the number of individuals susceptible to the disease.</li>
+<li><span  class="math">\( I \)</span>: the number of individuals infected with the disease and capable of spreading the disease to those in the susceptible group.</li>
+<li><span  class="math">\( R \)</span>: the number of individuals who have been infected and then removed from the infected group, either due to recovery or due to death. Individuals in this group are not capable of contracting the disease again or transmitting the infection to others.</li>
+</ul>
+
+<p>Our free variables are <span  class="math">\(t\)</span> for time and <span  class="math">\(N\)</span> for the population.</p>
+
+<p>There are multiple variations of the SIR model. The most basic version only accounts for the contact rate <span  class="math">\( \beta \)</span> and the recovery rate <span  class="math">\( \gamma \)</span>, python time:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">numpy</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">np</span>
+<span style="color:#007020;font-weight:bold">from</span> <span style="color:#0e84b5;font-weight:bold">scipy.integrate</span> <span style="color:#007020;font-weight:bold">import</span> odeint
+
+N <span style="color:#666">=</span> <span style="color:#40a070">7</span>_000_000_000  <span style="color:#60a0b0;font-style:italic"># Earth population</span>
+S <span style="color:#666">=</span> N <span style="color:#666">-</span> <span style="color:#40a070">1</span>  <span style="color:#60a0b0;font-style:italic"># Everybody except for patient zero</span>
+I <span style="color:#666">=</span> <span style="color:#40a070">1</span>_058_633  <span style="color:#60a0b0;font-style:italic"># Number of infected individuals (from data)</span>
+R <span style="color:#666">=</span> <span style="color:#40a070">142</span>_072  <span style="color:#60a0b0;font-style:italic"># Number of recovered individuals (from data)</span>
+beta <span style="color:#666">=</span> <span style="color:#40a070">0.9</span>  <span style="color:#60a0b0;font-style:italic"># infection rate (coin toss)</span>
+gamma <span style="color:#666">=</span> <span style="color:#40a070">0.14</span>  <span style="color:#60a0b0;font-style:italic"># Recovery rate (from data)</span>
+
+
+<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">diff</span>(sir, t):
+    dsdt <span style="color:#666">=</span> <span style="color:#666">-</span>(beta <span style="color:#666">*</span> sir[<span style="color:#40a070">0</span>] <span style="color:#666">*</span> sir[<span style="color:#40a070">1</span>]) <span style="color:#666">/</span> N
+    didt <span style="color:#666">=</span> (beta <span style="color:#666">*</span> sir[<span style="color:#40a070">0</span>] <span style="color:#666">*</span> sir[<span style="color:#40a070">1</span>]) <span style="color:#666">/</span> N <span style="color:#666">-</span> gamma <span style="color:#666">*</span> sir[<span style="color:#40a070">1</span>]
+    drdt <span style="color:#666">=</span> gamma <span style="color:#666">*</span> sir[<span style="color:#40a070">1</span>]
+    dsirdt <span style="color:#666">=</span> [dsdt, didt, drdt]
+    <span style="color:#007020;font-weight:bold">return</span> dsirdt
+
+
+sir0 <span style="color:#666">=</span> (S, I, R)  <span style="color:#60a0b0;font-style:italic"># ODE initial conditions</span>
+
+
+t <span style="color:#666">=</span> np<span style="color:#666">.</span>linspace(<span style="color:#40a070">0</span>, <span style="color:#40a070">200</span>)  <span style="color:#60a0b0;font-style:italic"># Let&#39;s solve over 200 days</span>
+
+sir <span style="color:#666">=</span> odeint(diff, sir0, t)</code></pre></div>
+<p>From this analysis we can conclude that, following this basic model, after 50 days cases of infection will start going down. According to the CDC, the <a href="https://www.cdc.gov/coronavirus/2019-ncov/summary.html">first case of coronavirus was reported Jan 30th 2020</a>.</p>
+
+<p>Here is the plot from running the basic SIR model;</p>
+
+<div id="/plots/coronavirus-sir.html" style="display: flex;justify-content: center">
+    <iframe src="/plots/coronavirus-sir.html" width="500vw" height="300" frameBorder="0"></iframe>
+</div>
+
+<p>Counting 50 days past Jan 30th, it seems we will reach peak infection rate around March 15th 2020. Normal disclaimer: by no means am I claiming this is an accurate epidemic modelling (or even that it is substantial). I personally have mathematical qualms with this model because not every one in the susceptible group will be infected and the transmission rate is a latent variable.</p>
+
+<p>Another way to model this outbreak is from a bayesian approach where we look at it from a population density perspective.</p>
+
+<p>We can say that infection rate per country <span  class="math">\(c\)</span> as a set of Poisson random variables:</p>
+
+<p><span  class="math">\[Pr(I_{c}(t) | \lambda_c(t)) = \text{Poisson}(\lambda_c(t)) \]</span></p>
+
+<p>Where the country specific outbreak intensity at time <span  class="math">\(t\)</span> is modeled as:</p>
+
+<p><span  class="math">\[\lambda_a(t) = S_c(t-1) \frac{I(t-1)\mathbf{B}}{N_c} \]</span></p>
+
+<p>where <span  class="math">\(S_c(t-1)\)</span> is the number of susceptibles in a specific country <span  class="math">\(c\)</span> in the previous time period, and <span  class="math">\(\mathbf{B}\)</span> a matrix of transmission coefficients (<a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005697#sec020">from Prem et al.</a>), and <span  class="math">\(N_c\)</span> an estimate of the population of in the country <span  class="math">\(c\)</span>.</p>
+
+<p>This can be modeled in <code>pymc3</code> where the number of all the variables take the form of distribution and use MCMC sampling to find the actual rates. See measles reference for more detail on using the bayesian approach.</p>
+
+<p>Remember to always be skeptical of news surrounding an outbreak, we are still in the midst of the battle. It is hard to see people lose loved ones to an outbreak, but with government intervention and adherence to basic hygiene and safety standards, the outbreak will hopefully be over soon enough.</p>
+
+<h2 id="references">References</h2>
+
+<p><a href="https://www.cdc.gov/coronavirus/2019-ncov/summary.html">https://www.cdc.gov/coronavirus/2019-ncov/summary.html</a>
+<a href="https://lexparsimon.github.io/coronavirus/">https://lexparsimon.github.io/coronavirus/</a>
+<a href="https://github.com/fonnesbeck/mongolia_measles">https://github.com/fonnesbeck/mongolia_measles</a></p>
 
         </p>
     </div>
