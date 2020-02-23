@@ -53,7 +53,7 @@ N = 7_000_000_000  # Earth population
 S = N - 1  # Everybody except for patient zero
 I = 78_044  # Number of infected individuals (from data)
 R = 22_858  # Number of recovered individuals (from data)
-beta = 0.9  # infection rate (coin toss)
+beta = 0.5  # infection rate (coin toss)
 gamma = 0.14  # Recovery rate (from data)
 
 
