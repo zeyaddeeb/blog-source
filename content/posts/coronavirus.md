@@ -16,7 +16,7 @@ Obviously, the first thing to analyze is the trend of cases overtime;
 
 {{% plot "/plots/coronavirus-trend.html" %}}
 
-This chart shows that confirmed cases are on the rise with a whopping total of 78,044 cases, with a recovery rate of 29.28% and a death rate of 3.12% as of Feb 26 2020.
+This chart shows that confirmed cases are on the rise with a whopping total of 78,044 cases, with a recovery rate of 29.28% and a death rate of 3.12% as of Feb 22 2020.
 
 There are two reasons why you might not get concerned about these stats.
 
