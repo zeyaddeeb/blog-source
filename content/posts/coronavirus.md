@@ -16,7 +16,7 @@ Obviously, the first thing to analyze is the trend of cases overtime;
 
 {{% plot "/plots/coronavirus-trend.html" %}}
 
-This chart shows that confirmed cases are on the rise with a whopping total of 1,058,633 cases, with a recovery rate of 13.43% and a death rate of 2.46% as of Feb 26 2020.
+This chart shows that confirmed cases are on the rise with a whopping total of 78,044 cases, with a recovery rate of 29.28% and a death rate of 3.12% as of Feb 26 2020.
 
 There are two reasons why you might not get concerned about these stats.
 
@@ -51,8 +51,8 @@ from scipy.integrate import odeint
 
 N = 7_000_000_000  # Earth population
 S = N - 1  # Everybody except for patient zero
-I = 1_058_633  # Number of infected individuals (from data)
-R = 142_072  # Number of recovered individuals (from data)
+I = 78_044  # Number of infected individuals (from data)
+R = 22_858  # Number of recovered individuals (from data)
 beta = 0.9  # infection rate (coin toss)
 gamma = 0.14  # Recovery rate (from data)
 
