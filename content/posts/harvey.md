@@ -74,8 +74,6 @@ import Elwood from elwood_player
 strategies = [s() for s in axl.strategies]
 
 def play_match(opponent: axl.Player) -> Tuple[str, str]:
-    if opponent == "Cooperator":
-        pass
     players = [opponent, Elwood()]
     match = axl.Match(players, turns=10)
     match.play()
