@@ -16,7 +16,7 @@
     
     
     
-    <link rel="stylesheet" href="https://www.zeyaddeeb.com/css/main.min.03322cbe6bddfc28e7b17b84bc5446282a510b14b57be3371ba1f68ef1ab9ce8.css"/>
+    <link rel="stylesheet" href="https://www.zeyaddeeb.com/css/main.min.07a9cfa1a3a8999e9a21606064f4a147e568dd57c3010c09f068f6a9c274e9ca.css"/>
 
     
     
@@ -123,17 +123,84 @@ if (!doNotTrack) {
         <div id="content" class="content-container">
         
 <h1 class="post-title">Harvey, the movie!</h1>
-    <time>February 1, 2020</time>
+    <time>March 14, 2020</time>
     <div>
         <p>
-        <p>Two of my favorite podcasts are <a href="https://www.wnycstudios.org/podcasts/radiolab">Radiolab</a> and <a href="https://www.wnycstudios.org/podcasts/anthropocene-reviewed">The Anthropocene Reviewed</a>(AR). Today, I&rsquo;ll be writing about an episode I heard from the latter.</p>
-<p>I learned about <a href="https://en.wikipedia.org/wiki/John_Green_(author)">John Green</a> (producer of AR) from his book <a href="https://en.wikipedia.org/wiki/Turtles_All_the_Way_Down_(novel)">Turtles All the Way Down</a>. I was curious since I heard of the title before in Stephen Hawking&rsquo;s book, <a href="https://en.wikipedia.org/wiki/A_Brief_History_of_Time">A Brief History of Time</a>. Here is the excerpt I remembered:</p>
+        <p>A while ago I was researching the origins of this quote from Stephen Hawking&rsquo;s <a href="https://en.wikipedia.org/wiki/A_Brief_History_of_Time">A Brief History of Time</a>:</p>
 <blockquote>
-<p>A well-known scientist (some say it was Bertrand Russell) once gave a public lecture on astronomy. He described how the earth orbits around the sun and how the sun, in turn, orbits around the centre of a vast collection of stars called our galaxy. At the end of the lecture, a little old lady at the back of the room got up and said: &ldquo;What you have told us is rubbish. The world is really a flat plate supported on the back of a giant tortoise.&rdquo; The scientist gave a superior smile before replying, &ldquo;What is the tortoise standing on?&rdquo; &ldquo;You&rsquo;re very clever, young man, very clever,&rdquo; said the old lady. &ldquo;But it&rsquo;s turtles all the way down!&rdquo; - Stephen Hawking</p>
+<p>A well-known scientist (some say it was Bertrand Russell) once gave a public lecture on astronomy. He described how the earth orbits around the sun and how the sun, in turn, orbits around the centre of a vast collection of stars called our galaxy. At the end of the lecture, a little old lady at the back of the room got up and said: &ldquo;What you have told us is rubbish. The world is really a flat plate supported on the back of a giant tortoise.&rdquo; The scientist gave a superior smile before replying, &ldquo;What is the tortoise standing on?&rdquo; &ldquo;You&rsquo;re very clever, young man, very clever, &quot; said the old lady.&ldquo;But it&rsquo;s turtles all the way down!&rdquo; - Stephen Hawking</p>
 </blockquote>
-<p>John Green reviewed the movie Harvey in <a href="https://www.wnycstudios.org/podcasts/anthropocene-reviewed/episodes/anthropocene-reviewed-velociraptors-and-harvey">this episode</a>, he also reviewed velociraptors, which was also good, but let&rsquo;s focus on the latter.</p>
+<p>After some googling I learned about the book <a href="https://en.wikipedia.org/wiki/Turtles_All_the_Way_Down_(novel)">Turtles All the Way Down</a>, which made me a fan of <a href="https://en.wikipedia.org/wiki/John_Green_(author)">John Green</a>, who also produces  one of my favorite podcasts, <a href="https://www.wnycstudios.org/podcasts/anthropocene-reviewed">The Anthropocene Reviewed</a>.</p>
+<p>In one of the <a href="https://www.wnycstudios.org/podcasts/anthropocene-reviewed/episodes/anthropocene-reviewed-velociraptors-and-harvey">episodes</a>, Green reviewed the 1950&rsquo;s movie <em>Harvey</em>.</p>
 <p><img src="/images/harvey.jpg#center" alt="Harvey movie Poster"></p>
-<p>I&rsquo;ll summarize to make the point and also to accommodate for non-podcast listening folks. John Green described a hard time he was going through and his boss then, recommended Harvey to watch while taking a couple of weeks off work. Trust me, you should listen to the episode.</p>
+<p>Spoiler alert ahead if you are planing on watching <em>Harvey</em>.</p>
+<p>The movie follows the life of Elwood P. Dowd, a drunk middle-age man and his imaginary, people-sized rabbit friend, Harvey (the <a href="https://en.wikipedia.org/wiki/P%C3%BAca">Púca</a>).</p>
+<p>Elwood has two main qualities. First, for most of the movie, he&rsquo;s the only person who can see this giant white rabbit. Second, he&rsquo;s exceptionally kind to everyone. It is his kindness that helps him successfully evade a lifetime stay in the psychiatric hospital. He explains his philosophy:</p>
+<blockquote>
+<p>In this world, you must be oh so smart or oh so pleasant. Well, for years I was smart. I recommend pleasant.</p>
+</blockquote>
+<p>After hearing this, I started to debate whether that is a good strategy from a computational game theory standpoint.</p>
+<p>I remember using this python package <code>axelrod</code>, named after the famous political scientist <a href="https://en.wikipedia.org/wiki/Robert_Axelrod">Robert Axelrod</a>. The package essentially lets you model behavior displayed in the <a href="https://en.wikipedia.org/wiki/Prisoner%27s_dilemma">Prisoner&rsquo;s Dilemma</a>. In this setting, you have only two possible actions, to cooperate or defect. You choose your behavior based on the utility and the action of your opponent&rsquo;s strategy.</p>
+<p>The package contains multiple strategies that players can adopt. If you follow Edward P Dowd&rsquo;s methodology, you&rsquo;d be identified as a <code>Cooperator</code>, a player who will always cooperate, regardless of your opponent&rsquo;s behavior.</p>
+<p>There are multiple player strategies in the package, the most famous ones include <code>TitForTat</code>, which describes a player who will always take the same action you take. Another is the <code>ForgetfulGrudger</code>, which is a player that starts by cooperating however will defect if at any point the opponent defects.</p>
+<p>Given that there are currently over 200 strategies in the package, you can create tournaments and let the players compete with a stunning variety of outcomes.</p>
+<p>We now have a theoretical way to test Dowd&rsquo;s claim that <code>Cooperator</code> is a winning strategy:</p>
+<p>First we can start by defining a player called <code>Elwood</code> who is modeled after <code>Cooperator</code>:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">from</span> <span style="color:#0e84b5;font-weight:bold">axelrod.action</span> <span style="color:#007020;font-weight:bold">import</span> Action
+<span style="color:#007020;font-weight:bold">from</span> <span style="color:#0e84b5;font-weight:bold">axelrod.player</span> <span style="color:#007020;font-weight:bold">import</span> Player
+
+C, D <span style="color:#666">=</span> Action<span style="color:#666">.</span>C, Action<span style="color:#666">.</span>D
+
+<span style="color:#007020;font-weight:bold">class</span> <span style="color:#0e84b5;font-weight:bold">Elwood</span>(Player):
+    <span style="color:#4070a0"></span><span style="color:#4070a0">&#34;&#34;&#34;</span><span style="color:#4070a0">
+</span><span style="color:#4070a0"></span><span style="color:#4070a0">    A player who only ever cooperates.</span><span style="color:#4070a0">
+</span><span style="color:#4070a0"></span><span style="color:#4070a0">    </span><span style="color:#4070a0">&#34;&#34;&#34;</span>
+    name <span style="color:#666">=</span> <span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">Elwood</span><span style="color:#4070a0">&#34;</span>
+    classifier <span style="color:#666">=</span> {
+        <span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">memory_depth</span><span style="color:#4070a0">&#34;</span>: <span style="color:#40a070">0</span>,
+        <span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">stochastic</span><span style="color:#4070a0">&#34;</span>: False,
+        <span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">makes_use_of</span><span style="color:#4070a0">&#34;</span>: <span style="color:#007020">set</span>(),
+        <span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">long_run_time</span><span style="color:#4070a0">&#34;</span>: False,
+        <span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">inspects_source</span><span style="color:#4070a0">&#34;</span>: False,
+        <span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">manipulates_source</span><span style="color:#4070a0">&#34;</span>: False,
+        <span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">manipulates_state</span><span style="color:#4070a0">&#34;</span>: False,
+    }
+
+    <span style="color:#555;font-weight:bold">@staticmethod</span>
+    <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">strategy</span>(opponent: Player) <span style="color:#666">-</span><span style="color:#666">&gt;</span> Action:
+        <span style="color:#007020;font-weight:bold">return</span> C
+
+</code></pre></div><p>Then you can import that player and set up a simple match against other strategies:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">from</span> <span style="color:#0e84b5;font-weight:bold">typing</span> <span style="color:#007020;font-weight:bold">import</span> Tuple
+<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">axelrod</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">axl</span>
+<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">pandas</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">pd</span>
+
+<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">Elwood</span> <span style="color:#0e84b5;font-weight:bold">from</span> <span style="color:#0e84b5;font-weight:bold">elwood_player</span>
+
+strategies <span style="color:#666">=</span> [s() <span style="color:#007020;font-weight:bold">for</span> s <span style="color:#007020;font-weight:bold">in</span> axl<span style="color:#666">.</span>strategies]
+
+<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">play_match</span>(opponent: axl<span style="color:#666">.</span>Player) <span style="color:#666">-</span><span style="color:#666">&gt;</span> Tuple[<span style="color:#007020">str</span>, <span style="color:#007020">str</span>]:
+    <span style="color:#007020;font-weight:bold">if</span> opponent <span style="color:#666">==</span> <span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">Cooperator</span><span style="color:#4070a0">&#34;</span>:
+        <span style="color:#007020;font-weight:bold">pass</span>
+    players <span style="color:#666">=</span> [opponent, Elwood()]
+    match <span style="color:#666">=</span> axl<span style="color:#666">.</span>Match(players, turns<span style="color:#666">=</span><span style="color:#40a070">10</span>)
+    match<span style="color:#666">.</span>play()
+    <span style="color:#007020;font-weight:bold">return</span> (opponent<span style="color:#666">.</span>name, match<span style="color:#666">.</span>winner())
+
+results <span style="color:#666">=</span> [play_match(o) <span style="color:#007020;font-weight:bold">for</span> o <span style="color:#007020;font-weight:bold">in</span> strategies]
+
+df <span style="color:#666">=</span> pd<span style="color:#666">.</span>DataFrame(results, columns<span style="color:#666">=</span>[<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">player</span><span style="color:#4070a0">&#34;</span>, <span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">winner</span><span style="color:#4070a0">&#34;</span>])
+
+<span style="color:#007020;font-weight:bold">print</span>(
+    f<span style="color:#4070a0"></span><span style="color:#4070a0">&#39;</span><span style="color:#4070a0">Number of games where there are no winners: {round(df[df[</span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">winner</span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">] == False].count() / df.count(), 3)[1] * 100}</span><span style="color:#4070a0">&#39;</span>
+    <span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">%</span><span style="color:#4070a0">&#34;</span>
+)
+<span style="color:#60a0b0;font-style:italic"># Number of games where there are no winners: 58.3% -- This number might be slightly different for everyone</span>
+</code></pre></div><p>After playing <code>Elwood</code> against all other strategies, you can see that the strategy never wins outright, but it does result in a tie 60% of the time.</p>
+<p>Given these results, I&rsquo;d say it makes good sense to be &lsquo;oh so pleasant&rsquo; after all.</p>
+<h4 id="references">References</h4>
+<p>Game of thrones model:
+<a href="https://nikoleta-v3.github.io/2017/08/grudges-war-GoT.html">https://nikoleta-v3.github.io/2017/08/grudges-war-GoT.html</a></p>
 
         </p>
     </div>
@@ -146,6 +213,11 @@ if (!doNotTrack) {
 
 
         
+
+<link rel="stylesheet" type="text/css" href="/css/katex.min.css">
+<script type="text/javascript" src="/js/katex.min.js"></script>
+<script type="text/javascript" src="/js/auto-render.min.js"onload="renderMathInElement(document.body);"></script>
+
         </div>
         <footer class="footer-mobile">
 	<div class="social-icons">

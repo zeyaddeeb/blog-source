@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Zeyad Deeb</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 14 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.zeyaddeeb.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Harvey, the movie!</title>
+      <link>https://www.zeyaddeeb.com/posts/harvey/</link>
+      <pubDate>Sat, 14 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.zeyaddeeb.com/posts/harvey/</guid>
+      <description>A while ago I was researching the origins of this quote from Stephen Hawking&amp;rsquo;s A Brief History of Time:
+ A well-known scientist (some say it was Bertrand Russell) once gave a public lecture on astronomy.</description>
+    </item>
     
     <item>
       <title>Coronavirus (COVID-19) outbreak analysis</title>
