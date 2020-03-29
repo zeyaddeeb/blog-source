@@ -180,8 +180,6 @@ C, D <span style="color:#666">=</span> Action<span style="color:#666">.</span>C,
 strategies <span style="color:#666">=</span> [s() <span style="color:#007020;font-weight:bold">for</span> s <span style="color:#007020;font-weight:bold">in</span> axl<span style="color:#666">.</span>strategies]
 
 <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">play_match</span>(opponent: axl<span style="color:#666">.</span>Player) <span style="color:#666">-</span><span style="color:#666">&gt;</span> Tuple[<span style="color:#007020">str</span>, <span style="color:#007020">str</span>]:
-    <span style="color:#007020;font-weight:bold">if</span> opponent <span style="color:#666">==</span> <span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">Cooperator</span><span style="color:#4070a0">&#34;</span>:
-        <span style="color:#007020;font-weight:bold">pass</span>
     players <span style="color:#666">=</span> [opponent, Elwood()]
     match <span style="color:#666">=</span> axl<span style="color:#666">.</span>Match(players, turns<span style="color:#666">=</span><span style="color:#40a070">10</span>)
     match<span style="color:#666">.</span>play()
