@@ -139,7 +139,7 @@ if (!doNotTrack) {
 <p>Obviously, the first thing to analyze is the trend of cases overtime;</p>
 
 <div id="/plots/coronavirus-trend.html" style="display: flex;justify-content: center">
-    <img src="/plots/coronavirus-trend.html" width="500vw" height="300" />
+    <iframe src="/plots/coronavirus-trend.html" width="500vw" height="300" frameBorder="0"></iframe>
 </div>
 
 <p>This chart shows that confirmed cases are on the rise with a whopping total of 78,044 cases, with a recovery rate of 29.28% and a death rate of 3.12% as of Feb 22 2020.</p>
@@ -152,7 +152,7 @@ if (!doNotTrack) {
 </ol>
 
 <div id="/plots/coronavirus-map.html" style="display: flex;justify-content: center">
-    <img src="/plots/coronavirus-map.html" width="500vw" height="300" />
+    <iframe src="/plots/coronavirus-map.html" width="500vw" height="300" frameBorder="0"></iframe>
 </div>
 
 <p>If you are an epidemiologist, you know that modeling of infectious diseases requires the use of Ordinary Differential Equations (ODEs) to estimate the long term impacts of the disease on a population.</p>
@@ -206,7 +206,7 @@ sir <span style="color:#666">=</span> odeint(diff, sir0, t)</code></pre></div>
 <p>Here is the plot from running the basic SIR model;</p>
 
 <div id="/plots/coronavirus-sir.html" style="display: flex;justify-content: center">
-    <img src="/plots/coronavirus-sir.html" width="500vw" height="300" />
+    <iframe src="/plots/coronavirus-sir.html" width="500vw" height="300" frameBorder="0"></iframe>
 </div>
 
 <p>Counting 50 days past Jan 30th, it seems we will reach peak infection rate around March 15th 2020. Normal disclaimer: by no means am I claiming this is an accurate epidemic modelling (or even that it is substantial). I personally have mathematical qualms with this model because not every one in the susceptible group will be infected and the transmission rate is a latent variable.</p>

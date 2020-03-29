@@ -1,4 +1,4 @@
 {{- $src := .Get "src" | default (.Get 0) -}}
 <div id="{{ .Get 0 }}" style="display: flex;justify-content: center">
-    <img src="{{ $src }}" width="500vw" height="300" />
+    <iframe src="{{ $src }}" width="500vw" height="300" frameBorder="0"></iframe>
 </div>
