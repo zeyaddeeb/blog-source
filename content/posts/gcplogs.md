@@ -15,7 +15,7 @@ When I started using Google Cloud, I was irritated with going to the console and
 The tool is build using python, and you can easily install it using `pip` 
 
 ``` bash
-pip install gcplogs
+pip install -U gcplogs
 ```
 
 A sample usage:
