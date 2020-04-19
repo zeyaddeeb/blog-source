@@ -100,3 +100,35 @@ All this can be visualized as follows (courtesy of wikipedia)
 
 So how can this help solve Boundary Value Problems (BVP)
 
+If you are familiar with the topic, you will recommend using, [The Shooting Method](https://en.wikipedia.org/wiki/Shooting_method): basically, instead of tying a general solution to a boundary value problem down at both points, one only ties it down at one end. This leaves a free parameter (in the case of a second order problem). For a given value of this free parameter, one then integrates out a solution to the differential equation. Specifically, you start at the tied-down boundary point and integrate out just like an initial value problem. When you get to the other boundary point, the error between your solution and the true boundary condition tells you how to adjust the free parameter. Repeat this process until a solution matching the second boundary condition is obtained.
+
+But for unbounded regions, this becomes tricky, we can apply the same ideas from Fourier transforms, For example:
+
+$$
+x =\begin{cases} u_{t}=4u_{xx}+\sin(t), &  -\infty  \leq  x \leq \infty, t>0\\u(x, 0)=e^{-x^2} \sin(x), & -\infty \leq x \leq \infty \end{cases}
+$$
+
+Then sum these solutions using an integral, 
+
+$$
+u(x, t) = \int_{-\infty}^{\infty}c(s)e^{-4s^2t}e^{isx}ds, 
+$$
+
+where $$c(x)$$ are the coefficients in the sum, analogous to discrete sums. The coefficient function is determined by the initial condition
+
+$$
+e^{-x^2}\sin(x) = \int_{-\infty}^{\infty}c(s)e^{isx}ds.
+$$
+
+The solution is then
+
+$$
+u(x, t) = \frac{1}{\sqrt{2\pi}i}\int_{-\infty}^{\infty}\{ \hat{f}(s-1)-\hat{f}(s+1)\}e^{-4s^2 t}e^{isx}ds.
+$$
+
+The Fourier transform applications are endless, it can still pull a good trick even in Ordinary Differential Equations.
+
+#### References
+
+[https://math.stackexchange.com/questions/2063595/using-fourier-transforms-to-solve-the-boundary-value-problem](https://math.stackexchange.com/questions/2063595/using-fourier-transforms-to-solve-the-boundary-value-problem)
+
