@@ -122,31 +122,95 @@ if (!doNotTrack) {
 </nav>
         <div id="content" class="content-container">
         
-<h1 class="post-title">Google Cloud logs for Humans</h1>
-    <time>March 29, 2020</time>
+<h1 class="post-title">Boundary Value Problems (BVP) with Fourier Transforms</h1>
+    <time>April 12, 2020</time>
     <div>
         <p>
-        <p>I was an avid AWS user until a year ago, when I started using GCP for various Machine Learning projects.</p>
+        <p>Everyone has their own mental triggers when hearing specific words. Let's take the word &quot;Engineering&quot;, which has many triggers, that can range all the way from &quot;Tech shop that writes software&quot; to &quot;Aerospace Manufacturing&quot;. Even though I write code for living, one word comes to mind when I hear the word &quot;Engineering&quot;, that is nothing but Differential Equations.</p>
 
-<p>Diving deeper into the clouds, I soon learned that logging becomes crucial to understand what is happening within your cloud environment.</p>
+<p>Lately, I've revisited Boundary Value Problems (BVP) and their relationship to Fourier Series. I'll attempt to simplify the topic a bit, but I can never do it justice. So, what is a Fourier Series, the core idea is to take a periodic signal <span  class="math">\(u(t)\)</span> and describes it as a sum of sine and cosine waves.(If you asked, why? the answer because it's easier to solve that way)</p>
 
-<p>In AWS, I used to go to the console to view my logs and make sure nothing was breaking, until one of my colleagues introduced me to <a href="https://github.com/jorgebastida/awslogs">awslogs</a>. This became my de facto &quot;real-time&quot; monitoring tool when I deploy/update a resource. I used it mainly to check if everything was smooth sailing. Later logs will hit whatever monitoring system you have in place, such as <a href="https://prometheus.io/">prometheus</a>, <a href="https://www.elastic.co/what-is/elk-stack">elk stack</a>, or whichever.</p>
+<p>A classical example, imagine you have the square wave function, the produces a signal like in the plot below:</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">matplotlib.pyplot</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">plt</span>
+<span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">numpy</span> <span style="color:#007020;font-weight:bold">as</span> <span style="color:#0e84b5;font-weight:bold">np</span>
 
-<p>When I started using Google Cloud, I was irritated with going to the console and writing a query to view my logs, until I started debugging native VPCs for Kuberenetes, at which point I began looking for a tool like <code>awslogs</code> but unfortunately didn't find one. So, I built one <code>gcplogs</code> . You can find the source code on <a href="https://github.com/zeyaddeeb/gcplogs">GitHub</a></p>
+fs <span style="color:#666">=</span> <span style="color:#40a070">100</span>
+square_wave_function <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">lambda</span> t: (<span style="color:#007020">abs</span>((t <span style="color:#666">%</span> <span style="color:#40a070">1</span>) <span style="color:#666">-</span> <span style="color:#40a070">0.25</span>) <span style="color:#666">&lt;</span> <span style="color:#40a070">0.25</span>)<span style="color:#666">.</span>astype(<span style="color:#007020">float</span>) <span style="color:#666">-</span> (
+    <span style="color:#007020">abs</span>((t <span style="color:#666">%</span> <span style="color:#40a070">1</span>) <span style="color:#666">-</span> <span style="color:#40a070">0.75</span>) <span style="color:#666">&lt;</span> <span style="color:#40a070">0.25</span>
+)
 
-<p>The tool is build using python, and you can easily install it using <code>pip</code></p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install -U gcplogs</code></pre></div>
-<p>A sample usage:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gcplogs get gce_instance --event-start<span style="color:#666">=</span><span style="color:#4070a0">&#39;1 week ago&#39;</span></code></pre></div>
-<div id="/images/gcplogs.gif" style="display: flex;justify-content: center">
-    <img src="/images/gcplogs.gif" width="100%" />
-</div>
+t <span style="color:#666">=</span> np<span style="color:#666">.</span>arange(<span style="color:#666">-</span><span style="color:#40a070">2</span>, <span style="color:#40a070">2</span>, <span style="color:#40a070">1</span> <span style="color:#666">/</span> fs)
+plt<span style="color:#666">.</span>plot(t, square_wave_function(t))
+plt<span style="color:#666">.</span>xlabel(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">$t$</span><span style="color:#4070a0">&#34;</span>)
+plt<span style="color:#666">.</span>ylabel(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">$u(t)$</span><span style="color:#4070a0">&#34;</span>)
+plt<span style="color:#666">.</span>title(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">Square Wave Function</span><span style="color:#4070a0">&#34;</span>)
+plt<span style="color:#666">.</span>show()</code></pre></div>
+<p><figure><img src="/images/square_wave_func.png#center" alt="Plot 1"></figure></p>
 
-<p>The most critical feature in this package is the ability to watch events as they happen using the <code>--watch</code> flag</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gcplogs get gce_instance --event-start<span style="color:#666">=</span><span style="color:#4070a0">&#39;1 min ago&#39;</span> --watch</code></pre></div>
-<p>If you have been working in cloud infrastructure for a while, then you might know tools like <a href="https://www.terraform.io/">Terraform</a>, <a href="https://www.pulumi.com/">Pulumi</a>, and others. This is a preferred way to manage how resources are provisioned, to understand how resources interact with each other, see your access management, and much more. <code>gcplogs</code> is also a good tool to monitor how these tools are deploying resources to your environment.</p>
+<p>Now, you can decompose that function in it's <span  class="math">\(sin\)</span> and <span  class="math">\(cos\)</span> coefficients. The math is pretty complex, but you can write a quick python function to do the heavy lifting, first let's look at the math;</p>
 
-<p>I'm still working on unit tests and making the tool more robust, but early feedback is always much appreciated.</p>
+<p><span  class="math">\[
+u(t)=\frac{a_0}{2}+\sum_{n=1}^{\infty}a_n\cos(2\pi \frac{nt}{L})+b_n\sin(2\pi\frac{nt}{L}), 
+\]</span></p>
+
+<p>where <span  class="math">\(a_n\)</span> and <span  class="math">\(b_n\)</span> are the coefficients of the Fourier series. They can be calculated by</p>
+
+<p><span  class="math">\[
+a_n=\frac{2}{L}\int_0^Lu(t)\cos(2\pi \frac{nt}{L})dt
+\]</span></p>
+
+<p><span  class="math">\[
+b_n=\frac{2}{L}\int_0^Lu(t)\sin(2\pi \frac{nt}{L})dt
+\]</span></p>
+
+<p>You can write a function to find the fourier coefficients and reconstruct them as necessary.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">fourier_series</span>(period, N):
+    result <span style="color:#666">=</span> []
+    T <span style="color:#666">=</span> <span style="color:#007020">len</span>(period)
+    t <span style="color:#666">=</span> np<span style="color:#666">.</span>arange(T)
+    <span style="color:#007020;font-weight:bold">for</span> n <span style="color:#007020;font-weight:bold">in</span> <span style="color:#007020">range</span>(N <span style="color:#666">+</span> <span style="color:#40a070">1</span>):
+        an <span style="color:#666">=</span> <span style="color:#40a070">2</span> <span style="color:#666">/</span> T <span style="color:#666">*</span> (period <span style="color:#666">*</span> np<span style="color:#666">.</span>cos(<span style="color:#40a070">2</span> <span style="color:#666">*</span> np<span style="color:#666">.</span>pi <span style="color:#666">*</span> n <span style="color:#666">*</span> t <span style="color:#666">/</span> T))<span style="color:#666">.</span>sum()
+        bn <span style="color:#666">=</span> <span style="color:#40a070">2</span> <span style="color:#666">/</span> T <span style="color:#666">*</span> (period <span style="color:#666">*</span> np<span style="color:#666">.</span>sin(<span style="color:#40a070">2</span> <span style="color:#666">*</span> np<span style="color:#666">.</span>pi <span style="color:#666">*</span> n <span style="color:#666">*</span> t <span style="color:#666">/</span> T))<span style="color:#666">.</span>sum()
+        result<span style="color:#666">.</span>append((an, bn))
+    <span style="color:#007020;font-weight:bold">return</span> np<span style="color:#666">.</span>array(result)
+
+<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">reconstruct_signal</span>(P, anbn):
+    result <span style="color:#666">=</span> <span style="color:#40a070">0</span>
+    t <span style="color:#666">=</span> np<span style="color:#666">.</span>arange(P)
+    <span style="color:#007020;font-weight:bold">for</span> n, (a, b) <span style="color:#007020;font-weight:bold">in</span> <span style="color:#007020">enumerate</span>(anbn):
+        <span style="color:#007020;font-weight:bold">if</span> n <span style="color:#666">==</span> <span style="color:#40a070">0</span>:
+            a <span style="color:#666">=</span> a <span style="color:#666">/</span> <span style="color:#40a070">2</span>
+        result <span style="color:#666">=</span> (
+            result
+
+            <span style="color:#666">+</span> a <span style="color:#666">*</span> np<span style="color:#666">.</span>cos(<span style="color:#40a070">2</span> <span style="color:#666">*</span> np<span style="color:#666">.</span>pi <span style="color:#666">*</span> n <span style="color:#666">*</span> t <span style="color:#666">/</span> P)
+            <span style="color:#666">+</span> b <span style="color:#666">*</span> np<span style="color:#666">.</span>sin(<span style="color:#40a070">2</span> <span style="color:#666">*</span> np<span style="color:#666">.</span>pi <span style="color:#666">*</span> n <span style="color:#666">*</span> t <span style="color:#666">/</span> P)
+
+        )
+    <span style="color:#007020;font-weight:bold">return</span> result
+
+t_period <span style="color:#666">=</span> np<span style="color:#666">.</span>arange(<span style="color:#40a070">0</span>, <span style="color:#40a070">1</span>, <span style="color:#40a070">1</span> <span style="color:#666">/</span> fs)
+f <span style="color:#666">=</span> fourier_series(square_wave_function(t_period), fs)
+plt<span style="color:#666">.</span>plot(t_period, square_wave_function(t_period), label<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">Original Signal</span><span style="color:#4070a0">&#34;</span>)
+
+plt<span style="color:#666">.</span>plot(
+    t_period,
+    reconstruct_signal(<span style="color:#007020">len</span>(t_period), f[:<span style="color:#40a070">30</span>, :]),
+    label<span style="color:#666">=</span><span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">Reconstructed with 30 Harmonics</span><span style="color:#4070a0">&#34;</span>,
+)
+
+plt<span style="color:#666">.</span>ylabel(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">$x(t)$</span><span style="color:#4070a0">&#34;</span>)
+plt<span style="color:#666">.</span>xlabel(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">$t$</span><span style="color:#4070a0">&#34;</span>)
+plt<span style="color:#666">.</span>legend(fontsize<span style="color:#666">=</span><span style="color:#40a070">8</span>)
+plt<span style="color:#666">.</span>savefig(<span style="color:#4070a0"></span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0">reconstructed.png</span><span style="color:#4070a0">&#34;</span>)
+plt<span style="color:#666">.</span>show()</code></pre></div>
+<p><figure><img src="/images/reconstructed.png#center" alt="Plot 2"></figure></p>
+
+<p>All this can be visualized as follows (courtesy of wikipedia)</p>
+
+<p><figure><img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Fourier_transform_time_and_frequency_domains.gif" alt="Wiki Animation"></figure></p>
+
+<p>So how can this help solve Boundary Value Problems</p>
 
         </p>
     </div>

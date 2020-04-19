@@ -2,6 +2,7 @@
 
 <html lang="en-us">
     <head>
+	<meta name="generator" content="Hugo 0.64.0" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,6 +26,8 @@
     
     
  
+    
+    <link rel="alternate" type="application/rss+xml" href="https://www.zeyaddeeb.com/index.xml" title="Zeyad Deeb" />
     
     
 <script type="application/javascript">
@@ -122,41 +125,53 @@ if (!doNotTrack) {
 </nav>
         <div id="content" class="content-container">
         
-<h1 class="post-title">Google Cloud logs for Humans</h1>
-    <time>March 29, 2020</time>
-    <div>
-        <p>
-        <p>I was an avid AWS user until a year ago, when I started using GCP for various Machine Learning projects.</p>
+<div class = "article-content">
+        
+        <div class="description">
+            <p>The statistical brick road</p>
+        </div>
+        
+        
+        
+        
+        <article>
+            <h2>
+                <a href="https://www.zeyaddeeb.com/posts/golang-in-ml/">
+                    Go, in a Machine Learning Application...
+                </a>
+            </h2>
+            <div><p>A few years back, like almost all engineers, I installed Golang (Go), added GOPATH to my .zshrc and ran a couple go run .</p></div>
+            <div class="post-footer">
+            <time>February 9, 2020</time>
 
-<p>Diving deeper into the clouds, I soon learned that logging becomes crucial to understand what is happening within your cloud environment.</p>
-
-<p>In AWS, I used to go to the console to view my logs and make sure nothing was breaking, until one of my colleagues introduced me to <a href="https://github.com/jorgebastida/awslogs">awslogs</a>. This became my de facto &quot;real-time&quot; monitoring tool when I deploy/update a resource. I used it mainly to check if everything was smooth sailing. Later logs will hit whatever monitoring system you have in place, such as <a href="https://prometheus.io/">prometheus</a>, <a href="https://www.elastic.co/what-is/elk-stack">elk stack</a>, or whichever.</p>
-
-<p>When I started using Google Cloud, I was irritated with going to the console and writing a query to view my logs, until I started debugging native VPCs for Kuberenetes, at which point I began looking for a tool like <code>awslogs</code> but unfortunately didn't find one. So, I built one <code>gcplogs</code> . You can find the source code on <a href="https://github.com/zeyaddeeb/gcplogs">GitHub</a></p>
-
-<p>The tool is build using python, and you can easily install it using <code>pip</code></p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install -U gcplogs</code></pre></div>
-<p>A sample usage:</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gcplogs get gce_instance --event-start<span style="color:#666">=</span><span style="color:#4070a0">&#39;1 week ago&#39;</span></code></pre></div>
-<div id="/images/gcplogs.gif" style="display: flex;justify-content: center">
-    <img src="/images/gcplogs.gif" width="100%" />
-</div>
-
-<p>The most critical feature in this package is the ability to watch events as they happen using the <code>--watch</code> flag</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gcplogs get gce_instance --event-start<span style="color:#666">=</span><span style="color:#4070a0">&#39;1 min ago&#39;</span> --watch</code></pre></div>
-<p>If you have been working in cloud infrastructure for a while, then you might know tools like <a href="https://www.terraform.io/">Terraform</a>, <a href="https://www.pulumi.com/">Pulumi</a>, and others. This is a preferred way to manage how resources are provisioned, to understand how resources interact with each other, see your access management, and much more. <code>gcplogs</code> is also a good tool to monitor how these tools are deploying resources to your environment.</p>
-
-<p>I'm still working on unit tests and making the tool more robust, but early feedback is always much appreciated.</p>
-
-        </p>
-    </div>
-    
-
-    <div class="page-footer">
-        <hr class="footer-divider">
+            
+            
+            </div> 
+           
+        </article>
         
     </div>
-
+        
+        <div class="paginator">
+        
+        
+        <p>Page 2 of 2</p>
+        <div class="paginator-group">
+            
+            <a class="color-link" href="/">
+                    <svg width="13px" height="9px" viewBox="0 0 13 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <g class="color-arrow" fill="#63BDA2" fill-rule="nonzero">
+                            <polygon id="Path" points="1.75929935 4.50000282 5.3292523 7.62371165 4.6707477 8.37628835 0.240700645 4.49999718 4.67081049 0.623709205 5.32930951 1.37629079"></polygon>
+                            <polygon id="Path" points="13 4 13 5 1 5 1 4"></polygon>
+                        </g>
+                </svg>  
+                Newer          
+            </a>
+            
+            
+        </div>
+        
+    </div>
 
         
 
