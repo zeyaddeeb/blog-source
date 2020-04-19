@@ -115,7 +115,7 @@ $$
 u(x, t) = \int_{-\infty}^{\infty}c(s)e^{-4s^2t}e^{isx}ds, 
 $$
 
-where $$c(x)$$ are the coefficients in the sum, analogous to discrete sums. The coefficient function is determined by the initial condition
+where $$c(s)$$ are the coefficients in the sum, analogous to discrete sums. The coefficient function is determined by the initial condition
 
 $$
 e^{-x^2}\sin(x) = \int_{-\infty}^{\infty}c(s)e^{isx}ds.
