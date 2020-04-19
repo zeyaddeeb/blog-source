@@ -8,7 +8,7 @@ Everyone has their own mental triggers when hearing specific words. Let's take t
 
 Lately, I've revisited Boundary Value Problems (BVP) and their relationship to Fourier Series. I'll attempt to simplify the topic a bit, but I can never do it justice.
 
-A quick refresher on Fourier Series, the core idea is to take a periodic signal $$u(t)$$ and describes it as a sum of sine and cosine waves.(If you asked, why? the answer because it's easier to solve that way)
+A quick refresher on Fourier Series, the core idea is to take a periodic signal $$u(t)$$ and describes it as a sum of sine and cosine waves.
 
 A classical example, imagine you have the square wave function, the produces a signal like in the plot below:
 
@@ -47,7 +47,7 @@ $$
 b_n=\frac{2}{L}\int_0^Lu(t)\sin(2\pi \frac{nt}{L})dt
 $$
 
-You can write a function to find the fourier coefficients and reconstruct them as necessary.
+As for python:
 
 ``` python
 def fourier_series(period, N):
@@ -92,15 +92,16 @@ plt.savefig("reconstructed.png")
 plt.show()
 ```
 
+This is the approximation produced by reconstructing the signal just as sum of $$\sin$$ and $$\cos$$
+
 ![Plot 2](/images/reconstructed.png#center)
 
-All this can be visualized as follows (courtesy of wikipedia)
+You can explain the whole process in one visualization (courtesy of wikipedia)
 
 ![Wiki Animation](https://upload.wikimedia.org/wikipedia/commons/5/50/Fourier_transform_time_and_frequency_domains.gif)
 
-So how can this help solve Boundary Value Problems (BVP)
-
-If you are familiar with the topic, you will recommend using, [The Shooting Method](https://en.wikipedia.org/wiki/Shooting_method): basically, instead of tying a general solution to a boundary value problem down at both points, one only ties it down at one end. This leaves a free parameter (in the case of a second order problem). For a given value of this free parameter, one then integrates out a solution to the differential equation. Specifically, you start at the tied-down boundary point and integrate out just like an initial value problem. When you get to the other boundary point, the error between your solution and the true boundary condition tells you how to adjust the free parameter. Repeat this process until a solution matching the second boundary condition is obtained.
+Now, how can this help solve Boundary Value Problems (BVP). If you are familiar with the topic, you will recommend using, [The Shooting Method](https://en.wikipedia.org/wiki/Shooting_method).
+Basically, instead of tying a general solution to a boundary value problem down at both points, one only ties it down at one end. This leaves a free parameter (in the case of a second order problem). For a given value of this free parameter, one then integrates out a solution to the differential equation. Specifically, you start at the tied-down boundary point and integrate out just like an initial value problem. When you get to the other boundary point, the error between your solution and the true boundary condition tells you how to adjust the free parameter. Repeat this process until a solution matching the second boundary condition is obtained.
 
 But for unbounded regions, this becomes tricky, we can apply the same ideas from Fourier transforms, For example:
 
@@ -125,6 +126,8 @@ The solution is then
 $$
 u(x, t) = \frac{1}{\sqrt{2\pi}i}\int_{-\infty}^{\infty}\{ \hat{f}(s-1)-\hat{f}(s+1)\}e^{-4s^2 t}e^{isx}ds.
 $$
+
+Python code on github, [https://github.com/zeyaddeeb/boundry-value-problems](https://github.com/zeyaddeeb/boundry-value-problems)
 
 The Fourier transform applications are endless, it can still pull a good trick even in Ordinary Differential Equations.
 
