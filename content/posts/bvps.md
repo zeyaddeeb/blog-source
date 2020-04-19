@@ -135,3 +135,5 @@ The Fourier transform applications are endless, it can still pull a good trick e
 
 [https://math.stackexchange.com/questions/2063595/using-fourier-transforms-to-solve-the-boundary-value-problem](https://math.stackexchange.com/questions/2063595/using-fourier-transforms-to-solve-the-boundary-value-problem)
 
+[https://dspillustrations.com/pages/posts/misc/fourier-series-and-harmonic-approximation.html](https://dspillustrations.com/pages/posts/misc/fourier-series-and-harmonic-approximation.html)
+
