@@ -4,4 +4,4 @@ type: "section"
 title: "About"
 ---
 
-Check me out on [linkedin](https://www.linkedin.com/in/zeyaddeeb) while I update this page.
+I honestly don't want to maintain this section, just check out my [LinkedIn](https://www.linkedin.com/in/zeyaddeeb) profile.
