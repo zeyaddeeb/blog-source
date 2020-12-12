@@ -3,7 +3,7 @@ date: 2020-12-12
 title: "TensorFlow Lite: Adventures in Scaling Production Models"
 summary: "Scaling models in production is hard. Hopefully this post helps you get some of your research done before setting out on your own scaling journey.
 
-TL;DR There's a good reason why everyone says to set Tensorflow Lite thread counts to 1."
+TL;DR There's a good reason why everyone says to set Tensorflow thread counts to 1."
 ---
 
 As a Data Scientist, I not only need to know how to develop and train models, I also need to deploy them to production to actually perform a their intended function, be it add face filter on your silly video (think: Snapchat), or a personal assistant which answers questions fo you (think: Siri).
